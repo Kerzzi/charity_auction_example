@@ -7,7 +7,10 @@ RSpec.describe AuctionAdmin, type: :model do
   it { is_expected.to validate_presence_of :auction }
   it { is_expected.to validate_presence_of :user }
 
-  it { is_expected.to validate_uniqueness_of(:user_id).scoped_to(:auction_id) }
+  it do
+    subject.user = FactoryGirl.build(:user) 
+    should validate_uniqueness_of(:user_id).scoped_to(:auction_id)  
+  end
 
   it "validates the uniqueness of user_id scoped to auction_id" do
     original = FactoryGirl.create(:auction_admin)
