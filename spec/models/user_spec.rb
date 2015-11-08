@@ -22,4 +22,5 @@ RSpec.describe User, type: :model do
   end
 
   it { is_expected.to have_many :auction_admins }
+  it { is_expected.to have_many :donations }
 end
