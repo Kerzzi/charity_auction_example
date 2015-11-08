@@ -7,8 +7,8 @@ RSpec.describe Donation do
     "quantity",
     "redemption_window_starts_at",
     "redemption_window_ends_at",
-    "minimum_bid_dollars",
-    "estimated_value_dollars",
+    "minimum_bid_amount",
+    "estimated_value_amount",
     "display_description",
     "admin_follow_up_needed",
     "fulfillment_type"
@@ -25,7 +25,7 @@ RSpec.describe Donation do
   #it { is_expected.to have_many :bids }
 
   it { is_expected.to validate_numericality_of(:quantity).is_greater_than(0).allow_nil }
-  it { is_expected.to validate_numericality_of(:minimum_bid_dollars).is_greater_than(0).allow_nil }
+  it { is_expected.to validate_numericality_of(:minimum_bid_amount).is_greater_than(0).allow_nil }
 
   it "validates that quantity is either nil or greater than 0" do
     subject.quantity = nil
@@ -44,7 +44,7 @@ RSpec.describe Donation do
     expect(subject.errors[:redemption_window_ends_at]).to include "must be greater than redemption_window_starts_at"
   end
 
-  it { is_expected.to validate_numericality_of(:estimated_value_dollars).is_greater_than_or_equal_to(0).allow_nil }
+  it { is_expected.to validate_numericality_of(:estimated_value_amount).is_greater_than_or_equal_to(0).allow_nil }
 
   it "defaults the admin_follow_up_needed to false" do
     expect(subject.admin_follow_up_needed).to eq false
