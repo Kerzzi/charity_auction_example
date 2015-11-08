@@ -2,6 +2,7 @@ class Auction < ActiveRecord::Base
   validate :ends_at_after_starts_at
   validate :donation_window_ends_at_after_starts_at
   validates :time_zone_id, inclusion: { in: ActiveSupport::TimeZone.all.map { |tz| tz.tzinfo.identifier } }, allow_blank: true
+  has_many :auction_admins
 
   private 
   def donation_window_ends_at_after_starts_at
