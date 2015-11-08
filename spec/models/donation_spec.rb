@@ -22,7 +22,7 @@ RSpec.describe Donation do
   it { is_expected.to belong_to :auction }
   it { is_expected.to belong_to :donor }
 
-  it { is_expected.to have_many :bids }
+  #it { is_expected.to have_many :bids }
 
   it { is_expected.to validate_numericality_of(:quantity).is_greater_than(0).allow_nil }
   it { is_expected.to validate_numericality_of(:minimum_bid_dollars).is_greater_than(0).allow_nil }

@@ -20,8 +20,7 @@ RSpec.describe User, type: :model do
     duplicate.valid?
     expect(duplicate.errors[:email_address]).to include "has already been taken"
   end
-
-  it { is_expected.to have_many :auction_admins }
+  it { is_expected.to have_many :auction_admins } 
   it { is_expected.to have_many :donations }
-  it { is_expected.to have_many :bids }
+  #it { is_expected.to have_many :bids }
 end
