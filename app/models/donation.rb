@@ -2,6 +2,7 @@ class Donation < ActiveRecord::Base
   belongs_to :auction
   belongs_to :bid_type
   belongs_to :donor, class_name: "User"
+  has_many :bids
 
   enum fulfillment_type: [:item,:certificate]
 

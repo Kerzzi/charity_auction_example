@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108155820) do
+ActiveRecord::Schema.define(version: 20151108161433) do
 
   create_table "auction_admins", force: :cascade do |t|
     t.integer  "user_id"
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(version: 20151108155820) do
   end
 
   add_index "bid_types", ["name"], name: "index_bid_types_on_name", unique: true
+
+  create_table "bids", force: :cascade do |t|
+    t.integer  "donation_id",    null: false
+    t.integer  "bidder_id",      null: false
+    t.integer  "amount_dollars", null: false
+    t.integer  "quantity",       null: false
+    t.datetime "placed_at",      null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "bids", ["bidder_id"], name: "index_bids_on_bidder_id"
+  add_index "bids", ["donation_id"], name: "index_bids_on_donation_id"
 
   create_table "donation_categories", force: :cascade do |t|
     t.string   "name",       null: false

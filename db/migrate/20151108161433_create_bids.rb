@@ -9,5 +9,7 @@ class CreateBids < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_foreign_key :bid, :users, column: :bidder_id
   end
 end
