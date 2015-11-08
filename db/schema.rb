@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108150525) do
+ActiveRecord::Schema.define(version: 20151108155820) do
 
   create_table "auction_admins", force: :cascade do |t|
     t.integer  "user_id"
@@ -54,19 +54,19 @@ ActiveRecord::Schema.define(version: 20151108150525) do
     t.string   "title"
     t.text     "description"
     t.integer  "quantity"
-    t.integer  "auction_id",                  null: false
+    t.integer  "auction_id",                                  null: false
     t.integer  "bid_type_id"
-    t.integer  "donor_id",                    null: false
+    t.integer  "donor_id",                                    null: false
     t.datetime "redemption_window_starts_at"
     t.datetime "redemption_window_ends_at"
     t.integer  "estimated_value_dollars"
     t.integer  "minimum_bid_dollars"
     t.text     "display_description"
-    t.boolean  "admin_follow_up_needed"
+    t.boolean  "admin_follow_up_needed",      default: false
     t.string   "item_number"
     t.integer  "fulfillment_type"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   add_index "donations", ["auction_id"], name: "index_donations_on_auction_id"
