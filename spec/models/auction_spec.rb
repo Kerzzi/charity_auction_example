@@ -37,5 +37,9 @@ RSpec.describe Auction, type: :model do
       subject.valid?
       expect(subject.errors[:time_zone_id]).to be_empty
     end
+
+    it "has a valid factory" do
+      expect(FactoryGirl.create(:auction)).to be_persisted
+    end
   end
 end

@@ -9,14 +9,14 @@ RSpec.describe User, type: :model do
 
   it "validates the uniqueness of mobile_phone_number" do
     subject = FactoryGirl.create(:user)
-    duplicate = FactoryGirl.create(:user, mobile_phone_number: subject.mobile_phone_number)
+    duplicate = FactoryGirl.build(:user, mobile_phone_number: subject.mobile_phone_number)
     duplicate.valid?
     expect(duplicate.errors[:mobile_phone_number]).to include "has already been taken"
   end
 
   it "validates the uniqueness of email_address" do
     subject = FactoryGirl.create(:user)
-    duplicate = FactoryGirl.create(:user, email_address: subject.email_address)
+    duplicate = FactoryGirl.build(:user, email_address: subject.email_address)
     duplicate.valid?
     expect(duplicate.errors[:email_address]).to include "has already been taken"
   end

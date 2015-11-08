@@ -4,4 +4,6 @@ class AuctionAdmin < ActiveRecord::Base
 
   validates :user, presence: true
   validates :auction, presence: true
+
+  validates :user_id, uniqueness: { scope: [:auction_id] }
 end

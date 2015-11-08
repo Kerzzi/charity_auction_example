@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :auction_admin do
-    user nil
-auction nil
+    association :user, strategy: :build
+    association :auction, strategy: :build
   end
 
 end
