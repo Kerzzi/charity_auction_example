@@ -13,7 +13,10 @@ RSpec.describe Auction, type: :model do
   describe "relationships" do
     it { is_expected.to have_many :auction_admins }
     it { is_expected.to have_many :donations }
+    it { is_expected.to belong_to :organization }
   end
+
+  it { is_expected.to validate_presence_of :organization }
 
   describe "validations" do
     it "ends_at is after starts_at" do

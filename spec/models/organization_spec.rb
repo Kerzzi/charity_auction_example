@@ -1,0 +1,8 @@
+require 'rails_helper'
+
+RSpec.describe Organization, type: :model do
+  it { is_expected.to have_attribute :name }
+  it { is_expected.to validate_presence_of :name }
+  it { is_expected.to have_many :auctions }
+  it { is_expected.to have_many :memberships }
+end

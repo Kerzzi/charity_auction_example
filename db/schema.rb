@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108184527) do
+ActiveRecord::Schema.define(version: 20151108193844) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "auction_admins", force: :cascade do |t|
     t.integer  "user_id"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20151108184527) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "auction_admins", ["auction_id"], name: "index_auction_admins_on_auction_id"
-  add_index "auction_admins", ["user_id"], name: "index_auction_admins_on_user_id"
+  add_index "auction_admins", ["auction_id"], name: "index_auction_admins_on_auction_id", using: :btree
+  add_index "auction_admins", ["user_id"], name: "index_auction_admins_on_user_id", using: :btree
 
   create_table "auctions", force: :cascade do |t|
     t.datetime "starts_at"
@@ -32,7 +35,10 @@ ActiveRecord::Schema.define(version: 20151108184527) do
     t.datetime "donation_window_ends_at"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.integer  "organization_id",         null: false
   end
+
+  add_index "auctions", ["organization_id"], name: "index_auctions_on_organization_id", using: :btree
 
   create_table "bid_types", force: :cascade do |t|
     t.string   "name",       null: false
@@ -40,20 +46,7 @@ ActiveRecord::Schema.define(version: 20151108184527) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "bid_types", ["name"], name: "index_bid_types_on_name", unique: true
-
-  create_table "bids", force: :cascade do |t|
-    t.integer  "donation_id",    null: false
-    t.integer  "bidder_id",      null: false
-    t.integer  "amount_dollars", null: false
-    t.integer  "quantity",       null: false
-    t.datetime "placed_at",      null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "bids", ["bidder_id"], name: "index_bids_on_bidder_id"
-  add_index "bids", ["donation_id"], name: "index_bids_on_donation_id"
+  add_index "bid_types", ["name"], name: "index_bid_types_on_name", unique: true, using: :btree
 
   create_table "donation_categories", force: :cascade do |t|
     t.string   "name",       null: false
@@ -61,7 +54,7 @@ ActiveRecord::Schema.define(version: 20151108184527) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "donation_categories", ["name"], name: "index_donation_categories_on_name", unique: true
+  add_index "donation_categories", ["name"], name: "index_donation_categories_on_name", unique: true, using: :btree
 
   create_table "donations", force: :cascade do |t|
     t.string   "title"
@@ -82,9 +75,25 @@ ActiveRecord::Schema.define(version: 20151108184527) do
     t.datetime "updated_at",                                  null: false
   end
 
-  add_index "donations", ["auction_id"], name: "index_donations_on_auction_id"
-  add_index "donations", ["bid_type_id"], name: "index_donations_on_bid_type_id"
-  add_index "donations", ["donor_id"], name: "index_donations_on_donor_id"
+  add_index "donations", ["auction_id"], name: "index_donations_on_auction_id", using: :btree
+  add_index "donations", ["bid_type_id"], name: "index_donations_on_bid_type_id", using: :btree
+  add_index "donations", ["donor_id"], name: "index_donations_on_donor_id", using: :btree
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "organization_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "memberships", ["organization_id"], name: "index_memberships_on_organization_id", using: :btree
+  add_index "memberships", ["user_id"], name: "index_memberships_on_user_id", using: :btree
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                null: false
@@ -95,7 +104,15 @@ ActiveRecord::Schema.define(version: 20151108184527) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "users", ["email_address"], name: "index_users_on_email_address", unique: true
-  add_index "users", ["mobile_phone_number"], name: "index_users_on_mobile_phone_number", unique: true
+  add_index "users", ["email_address"], name: "index_users_on_email_address", unique: true, using: :btree
+  add_index "users", ["mobile_phone_number"], name: "index_users_on_mobile_phone_number", unique: true, using: :btree
 
+  add_foreign_key "auction_admins", "auctions"
+  add_foreign_key "auction_admins", "users"
+  add_foreign_key "auctions", "organizations"
+  add_foreign_key "donations", "auctions"
+  add_foreign_key "donations", "bid_types"
+  add_foreign_key "donations", "users", column: "donor_id"
+  add_foreign_key "memberships", "organizations"
+  add_foreign_key "memberships", "users"
 end
