@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108123045) do
+ActiveRecord::Schema.define(version: 20151108131118) do
 
   create_table "auctions", force: :cascade do |t|
     t.datetime "starts_at"
@@ -39,5 +39,17 @@ ActiveRecord::Schema.define(version: 20151108123045) do
   end
 
   add_index "donation_categories", ["name"], name: "index_donation_categories_on_name", unique: true
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                null: false
+    t.string   "mobile_phone_number", null: false
+    t.string   "email_address",       null: false
+    t.string   "physical_address",    null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "users", ["email_address"], name: "index_users_on_email_address", unique: true
+  add_index "users", ["mobile_phone_number"], name: "index_users_on_mobile_phone_number", unique: true
 
 end
