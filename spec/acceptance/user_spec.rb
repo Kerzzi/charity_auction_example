@@ -29,7 +29,7 @@ RSpec.resource "Users" do
 
     parameter "physical-address", <<-DESC, scope: :attributes, required: true
       The physical address of the user.
-    DESC 
+    DESC
   end
 
   post "/v1/users" do
