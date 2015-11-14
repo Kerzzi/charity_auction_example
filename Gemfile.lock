@@ -151,7 +151,7 @@ DEPENDENCIES
   byebug
   doorkeeper
   factory_girl_rails
-  jsonapi-resources (~> 0.6.0)
+  jsonapi-resources
   pg
   puma
   rails (= 4.2.4)

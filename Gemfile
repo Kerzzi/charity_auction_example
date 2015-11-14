@@ -5,7 +5,7 @@ gem 'pg'
 gem 'bcrypt', '~> 3.1.7'
 gem 'puma'
 gem 'doorkeeper'
-gem 'jsonapi-resources', '~> 0.6.0'
+gem 'jsonapi-resources'
 
 group :development, :test do
   gem 'byebug'

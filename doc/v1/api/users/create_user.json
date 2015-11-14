@@ -1,0 +1,68 @@
+{
+  "resource": "Users",
+  "http_method": "POST",
+  "route": "/v1/users",
+  "description": "Create user",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "type",
+      "description": "      The type of the resource. Must be users.\n"
+    },
+    {
+      "scope": "attributes",
+      "required": true,
+      "name": "password",
+      "description": "      The password of the user\n"
+    },
+    {
+      "scope": "attributes",
+      "required": true,
+      "name": "name",
+      "description": "      The name of the user\n"
+    },
+    {
+      "scope": "attributes",
+      "required": true,
+      "name": "mobile-phone-number",
+      "description": "      The mobile phone of the user.\n"
+    },
+    {
+      "scope": "attributes",
+      "required": true,
+      "name": "email-address",
+      "description": "      The email address of the user.\n"
+    },
+    {
+      "scope": "attributes",
+      "required": true,
+      "name": "physical-address",
+      "description": "      The physical address of the user.\n"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/v1/users",
+      "request_body": "{\"data\":{\"type\":\"users\",\"attributes\":{\"password\":\"12344321\",\"name\":\"Sean Devine\",\"mobile-phone-number\":\"+80732233444\",\"email-address\":\"test@test.com\",\"physical-address\":\"bush street 15a\"}}}",
+      "request_headers": {
+        "Content-Type": "application/vnd.api+json"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/vnd.api+json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\"data\":{\"id\":\"192\",\"type\":\"users\",\"links\":{\"self\":\"http://example.org/v1/users/192\"},\"attributes\":{\"name\":\"Sean Devine\",\"mobile-phone-number\":\"+80732233444\",\"email-address\":\"test@test.com\",\"physical-address\":\"bush street 15a\"}}}",
+      "response_headers": {
+        "Content-Type": "application/vnd.api+json"
+      },
+      "response_content_type": "application/vnd.api+json",
+      "curl": null
+    }
+  ]
+}
