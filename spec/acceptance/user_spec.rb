@@ -29,7 +29,8 @@ RSpec.resource "Users" do
 
     parameter "physical-address", <<-DESC, scope: :attributes, required: true
       The physical address of the user.
-    DESC end
+    DESC 
+  end
 
   post "/v1/users" do
     include_context "user_parameters"
