@@ -1,7 +1,7 @@
 module V1
   RSpec.describe UserResource do
 
-    let :createable_fields do
+    let :creatable_fields do
       [:name,:mobile_phone_number,:email_address,:physical_address,:password].sort
     end
 
@@ -9,16 +9,16 @@ module V1
       described_class.new User.new, {}
     end
 
-    it "has the expected createable fields" do
-      expect(described_class.createable_fields({}).sort).to eq createable_fields
+    it "has the expected creatable fields" do
+      expect(described_class.creatable_fields({}).sort).to eq creatable_fields
     end
 
     it "has the expected updatable fields" do
-      expect(described_class.updatable_fields({}).sort).to eq createable_fields
+      expect(described_class.updatable_fields({}).sort).to eq creatable_fields
     end
 
     it "has the expected fetchable fields" do
-      expect(subject.fetchable_fields.sort).to eq (createable_fields + [:id,:created_at,:updated_at] - [:password]).sort
+      expect(subject.fetchable_fields.sort).to eq (creatable_fields + [:id,:created_at,:updated_at] - [:password]).sort
     end
   end
 end
