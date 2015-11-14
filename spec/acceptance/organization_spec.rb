@@ -73,4 +73,25 @@ RSpec.resource "Organizations" do
       expect(organization["data"]["attributes"]["name"]).to eq public_send("name")
     end
   end
+
+  get "/v1/organizations" do
+    before do
+      2.times do
+        FactoryGirl.create(:organization)
+      end
+    end
+
+    example_request "GET /v1/organizations" do
+      expect(status).to eq 200
+      organizations = JSON.parse(response_body)
+      expect(organizations["data"].size).to eq 2
+    end
+  end
+
+  delete "/v1/organizations/:organization_id" do
+    include_context "with a persisted organization"
+    example_request "DELETE /v1/organizations/:organization_id" do
+      expect(status).to eq 204
+    end
+  end
 end
