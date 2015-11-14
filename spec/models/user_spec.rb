@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of required_attribute }
   end
 
+  it { is_expected.to validate_presence_of :password }
 
   it "validates the uniqueness of mobile_phone_number" do
     subject = FactoryGirl.create(:user)

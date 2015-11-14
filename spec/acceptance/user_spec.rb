@@ -2,7 +2,25 @@ require 'spec_helper'
 require 'rspec_api_documentation_helper'
 
 RSpec.resource "Users" do
+  header "Content-Type", "application/vnd.api+json"
+
   post "/v1/users" do
+    parameter "type", <<-DESC, required: true
+      The type of the resource. Must be users.
+    DESC
+
+    let "type" do
+      "users"
+    end
+
+    parameter "password", <<-DESC, scope: :attributes, required: true
+      The password of the user
+    DESC
+
+    let "password" do
+      "12344321"
+    end
+
     parameter "name", <<-DESC, scope: :attributes, required: true
       The name of the user
     DESC
@@ -37,6 +55,8 @@ RSpec.resource "Users" do
 
     example_request "Create user" do
       expect(status).to eq 201
+      user = JSON.parse(response_body)
+      expect(user["data"]["attributes"]["email-address"]).to eq send("email-address")
     end
   end
 end
