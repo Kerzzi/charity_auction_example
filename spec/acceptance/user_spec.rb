@@ -77,6 +77,29 @@ RSpec.resource "Users" do
     end
   end
 
+  get "/v1/users/me" do
+    let! :persisted_user do
+      FactoryGirl.create(:user)
+    end
+
+    let :access_token do
+      Doorkeeper::AccessToken.create!(resource_owner_id: persisted_user.id)
+    end
+
+    before do
+      header "Authorization", "Bearer #{access_token.token}"
+    end
+
+    let "email_address" do
+      persisted_user.email_address
+    end
+
+    example_request "GET /v1/users/me" do
+      expect(status).to eq 200
+      expect(JSON.parse(response_body)["data"]["attributes"]["email-address"]).to eq public_send("email_address")
+    end
+  end
+
   patch "v1/users/:user_id" do
     include_context "user_parameters"
 
