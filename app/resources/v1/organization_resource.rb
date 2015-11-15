@@ -3,10 +3,11 @@ module V1
     attribute :name
 
     has_many :memberships
+    has_many :auctions
 
     class << self
       def creatable_fields(context)
-        super - [:memberships]
+        super - [:memberships, :auctions]
       end
 
       alias_method :updatable_fields, :creatable_fields

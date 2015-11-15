@@ -48,7 +48,6 @@ RSpec.resource "Memberships" do
     end
 
     example_request "POST /v1/memberships" do
-      puts response_body
       expect(status).to eq 201
     end
   end 
