@@ -17,4 +17,4 @@
 /tmp
 
 /spec/examples.txt
-/doc/v1/api
+/doc/v1/api/*
