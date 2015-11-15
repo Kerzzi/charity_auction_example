@@ -35,7 +35,7 @@ RSpec.resource "Donation Categories" do
       DonationCategory.first.id
     end
 
-    example_request "GET /v1/donation-categories/:donation_category_id" do
+    example_request "GET /v1/donation-categories/:id" do
       expect(status).to eq 200
     end
   end
@@ -73,7 +73,7 @@ RSpec.resource "Donation Categories" do
       "Automated Labor"
     end
 
-    example_request "PATCH /v1/donation-categories" do
+    example_request "PATCH /v1/donation-categories/:id" do
       expect(status).to eq 200
       expect(JSON.parse(response_body)["data"]["attributes"]["name"]).to eq public_send("name")
     end 
@@ -84,7 +84,7 @@ RSpec.resource "Donation Categories" do
       DonationCategory.first.id.to_s
     end
 
-    example_request "DELETE /v1/donation-categories/:donation_category_id" do
+    example_request "DELETE /v1/donation-categories/:id" do
       expect(status).to eq 204
     end
   end

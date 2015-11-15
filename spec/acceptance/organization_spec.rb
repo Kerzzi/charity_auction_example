@@ -41,7 +41,7 @@ RSpec.resource "Organizations" do
 
   get "/v1/organizations/:organization_id" do
     include_context "with a persisted organization"
-    example_request "GET /v1/organizations/:organization_id" do
+    example_request "GET /v1/organizations/:id" do
       expect(status).to eq 200
     end
   end
@@ -66,7 +66,7 @@ RSpec.resource "Organizations" do
       "2nd Street High School"
     end
 
-    example_request "PATCH /v1/organizations/:organization_id" do
+    example_request "PATCH /v1/organizations/:id" do
       expect(status).to eq 200
       organization = JSON.parse(response_body)
       expect(organization["data"]["attributes"]["name"]).to eq public_send("name")
@@ -89,7 +89,7 @@ RSpec.resource "Organizations" do
 
   delete "/v1/organizations/:organization_id" do
     include_context "with a persisted organization"
-    example_request "DELETE /v1/organizations/:organization_id" do
+    example_request "DELETE /v1/organizations/:id" do
       expect(status).to eq 204
     end
   end

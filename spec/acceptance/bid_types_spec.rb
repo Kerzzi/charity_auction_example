@@ -14,14 +14,14 @@ RSpec.resource "BidTypes" do
       expect(status).to eq 200
       expect(JSON.parse(response_body)["data"].size).to eq BidType.count
     end
-  end
+  end 
 
   get "v1/bid-types/:bid_type_id" do
     let :bid_type_id do
       BidType.first.id
     end
 
-    example_request "GET /v1/bid-types/:bid_type_id" do
+    example_request "GET /v1/bid-types/:id" do
       expect(status).to eq 200
     end
   end

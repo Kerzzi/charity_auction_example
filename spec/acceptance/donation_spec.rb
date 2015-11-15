@@ -123,7 +123,7 @@ RSpec.resource "Donations" do
       persisted_donation.id.to_s
     end
 
-    example_request "GET /v1/donations/:donation_id" do
+    example_request "GET /v1/donations/:id" do
       expect(status).to eq 200
     end
   end
@@ -148,7 +148,7 @@ RSpec.resource "Donations" do
       "new title"
     end
 
-    example_request "PATCH /v1/donations/:donation_id" do
+    example_request "PATCH /v1/donations/:id" do
       expect(status).to eq 200
       expect(JSON.parse(response_body)["data"]["attributes"]["title"]).to eq public_send("title")
     end
@@ -169,7 +169,7 @@ RSpec.resource "Donations" do
       persisted_donation.id.to_s
     end
 
-    example_request "DELETE /v1/donations/:donation_id" do
+    example_request "DELETE /v1/donations/:id" do
       expect(status).to eq 204
     end
   end
