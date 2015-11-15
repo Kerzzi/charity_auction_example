@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :donation do
-    title "MyString"
-    description "MyText"
+    title "Sky Resort Weekend"
+    description "You get my place for three days"
     quantity 1
     association :auction, strategy: :build
     association :bid_type, strategy: :build
