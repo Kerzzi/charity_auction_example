@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   validates :email_address, presence: true, uniqueness: true
   validates :physical_address, presence: true
 
-  has_many :auction_admins
   has_many :bids, foreign_key: :bidder_id
   has_many :donations, foreign_key: :donor_id
   has_many :memberships
