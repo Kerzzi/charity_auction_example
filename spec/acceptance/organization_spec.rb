@@ -16,6 +16,7 @@ RSpec.resource "Organizations" do
 
   post "v1/organizations" do
     include_context "organization parameters"
+
     parameter "name", <<-DESC, required: true, scope: :attributes
       The name of the organization.
     DESC
@@ -24,8 +25,16 @@ RSpec.resource "Organizations" do
       "1st Street Elementary School"
     end
 
+    before do
+      @current_user = FactoryGirl.create(:user)
+      access_token = Doorkeeper::AccessToken.create(resource_owner_id: @current_user.id)
+      header "Authorization", "Bearer #{access_token.token}"
+    end
+
     example_request "POST v1/organizations" do
       expect(status).to eq 201
+      organization = Organization.find(JSON.parse(response_body)["data"]["id"].to_i)
+      expect(organization.memberships.find { |m| m.user == @current_user }).not_to be_nil
     end
   end
 

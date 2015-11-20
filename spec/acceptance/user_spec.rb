@@ -35,7 +35,6 @@ RSpec.resource "Users" do
   post "/v1/users" do
     include_context "user_parameters"
 
-
     let "password" do
       "12344321"
     end
